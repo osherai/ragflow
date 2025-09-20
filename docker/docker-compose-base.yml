@@ -141,8 +141,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
       - TZ=${TIMEZONE}
-    command:
-      --max_connections=1000
+    command: --max_connections=1000
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
       --default-authentication-plugin=mysql_native_password
@@ -157,7 +156,7 @@ services:
     networks:
       - ragflow
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-p${MYSQL_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-p${MYSQL_PASSWORD}"]
       interval: 10s
       timeout: 10s
       retries: 3
@@ -204,9 +203,7 @@ services:
       interval: 5s
       timeout: 3s
       retries: 3
-      start_period: 10s    
-
-
+      start_period: 10s
 
 volumes:
   esdata01:

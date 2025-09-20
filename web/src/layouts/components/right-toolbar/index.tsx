@@ -27,7 +27,7 @@ const handleGithubCLick = () => {
 };
 
 const handleDocHelpCLick = () => {
-  window.open('https://ragflow.io/docs/dev/category/guides', 'target');
+  window.open('https://osher.com.au/docs/dev/category/guides', 'target');
 };
 
 const RightToolBar = () => {

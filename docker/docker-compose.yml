@@ -6,7 +6,9 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    image: ${RAGFLOW_IMAGE}
+    build:
+      context: ../
+      dockerfile: Dockerfile
     # Example configuration to set up an MCP server:
     # command:
     #   - --enable-mcpserver
@@ -22,7 +24,7 @@ services:
     #   - --no-transport-sse-enabled # Disable legacy SSE endpoints (/sse and /messages/)
     #   - --no-transport-streamable-http-enabled #  Disable Streamable HTTP transport (/mcp endpoint)
     #   - --no-json-response # Disable JSON response mode in Streamable HTTP transport (instead of SSE over HTTP)
-    container_name: ragflow-server
+    container_name: osher-digital-server
     ports:
       - ${SVR_HTTP_PORT}:9380
       - 80:80

@@ -34,7 +34,7 @@ import { useLocation } from 'umi';
 import { BellButton } from './bell-button';
 
 const handleDocHelpCLick = () => {
-  window.open('https://ragflow.io/docs/dev/category/guides', 'target');
+  window.open('https://osher.com.au/docs/dev/category/guides', 'target');
 };
 
 export function Header() {

@@ -126,7 +126,7 @@ export enum FileMimeType {
   Json = 'application/json',
 }
 
-export const Domain = 'demo.ragflow.io';
+export const Domain = 'demo.osher.com.au';
 
 //#region file preview
 export const Images = [
@@ -149,7 +149,7 @@ export const SupportedPreviewDocumentTypes = [...ExceptiveType];
 //#endregion
 
 export enum Platform {
-  RAGFlow = 'RAGFlow',
+  RAGFlow = 'Osher Digital',
   Dify = 'Dify',
   FastGPT = 'FastGPT',
   Coze = 'Coze',
