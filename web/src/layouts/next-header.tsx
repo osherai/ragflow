@@ -20,7 +20,6 @@ import {
   CircleHelp,
   Cpu,
   File,
-  Github,
   House,
   Library,
   MessageSquareText,
@@ -34,7 +33,7 @@ import { useLocation } from 'umi';
 import { BellButton } from './bell-button';
 
 const handleDocHelpCLick = () => {
-  window.open('https://osher.com.au/docs/dev/category/guides', 'target');
+  window.open('https://osher.com.au/contact/', 'target');
 };
 
 export function Header() {
@@ -114,15 +113,6 @@ export function Header() {
           className="size-10 mr-[12] cursor-pointer"
           onClick={handleLogoClick}
         />
-        <a
-          className="flex items-center gap-1.5 text-text-secondary"
-          target="_blank"
-          href="https://github.com/infiniflow/ragflow"
-          rel="noreferrer"
-        >
-          <Github className="size-4" />
-          {/* <span className=" text-base">21.5k stars</span> */}
-        </a>
       </div>
       <Segmented
         options={options}
