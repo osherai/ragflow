@@ -218,6 +218,9 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
+      args:
+        NEED_MIRROR: ${NEED_MIRROR:-0}
+        LIGHTEN: ${LIGHTEN:-0}
     # Example configuration to set up an MCP server:
     # command:
     #   - --enable-mcpserver

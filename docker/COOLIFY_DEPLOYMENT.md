@@ -100,8 +100,14 @@ In your Coolify project settings:
 
 1. **Docker Compose File**: Set to `docker/docker-compose.coolify.yml`
 2. **Environment Variables**: Upload your `.env` file or set variables in Coolify's UI
-3. **Build Context**: Set to the repository root (parent of docker directory)
+3. **Working Directory**: Set to `docker` (the compose file needs to be run from the docker directory)
 4. **Profiles**: Set `COMPOSE_PROFILES` environment variable as needed
+
+**Important Notes:**
+- The Dockerfile has been updated to accept all build arguments that Coolify automatically injects
+- Building from source will work out of the box - no special configuration needed
+- Set `NEED_MIRROR=1` if you need to use mirror repositories (for China/faster builds)
+- Set `LIGHTEN=1` for a lighter build without some embedding models
 
 ### 5. Alternative: Override Files
 
@@ -127,14 +133,39 @@ docker/
 └── COOLIFY_DEPLOYMENT.md         # This guide
 ```
 
+## Building from Source
+
+The `docker-compose.coolify.yml` file is configured to build from source by default. The Dockerfile has been updated to accept all build arguments that Coolify automatically injects, so building will work seamlessly.
+
+### Build Configuration Options
+
+You can customize the build with these optional environment variables:
+
+- **`NEED_MIRROR`**: Set to `1` if you need to use mirror repositories (recommended for deployments in China or for faster builds)
+- **`LIGHTEN`**: Set to `1` for a lighter build that excludes some large embedding models (reduces image size)
+
+These can be set in Coolify's environment variables section.
+
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Services not starting**: Ensure all required environment variables are set
-2. **Port conflicts**: Check that ports in your environment don't conflict with other services
-3. **Memory issues**: Adjust `MEM_LIMIT` based on your server's available memory
-4. **Profile not activated**: Make sure `COMPOSE_PROFILES` is set correctly
+1. **Build argument errors** (like "Unknown variable DOC_ENGINE"):
+   - Status: ✅ **FIXED** - The Dockerfile now accepts all build args that Coolify passes
+   - The Dockerfile declares all environment variables as build args to prevent errors
+   - Only `NEED_MIRROR` and `LIGHTEN` are actually used; others are accepted but ignored
+
+2. **Services not starting**: Ensure all required environment variables are set
+
+3. **Port conflicts**: Check that ports in your environment don't conflict with other services
+
+4. **Memory issues**: Adjust `MEM_LIMIT` based on your server's available memory
+
+5. **Profile not activated**: Make sure `COMPOSE_PROFILES` is set correctly
+
+6. **Dockerfile not found at ../Dockerfile**: This shouldn't occur with the build configuration, but if you see it, check that the Working Directory is set to `docker` in Coolify.
+
+7. **Volume mount issues**: Ensure the working directory is set to `docker` in Coolify so relative paths work correctly
 
 ### Logs
 
@@ -143,6 +174,7 @@ Check Coolify's logs for any startup issues. Common problems include:
 - Port conflicts
 - Insufficient memory
 - Network connectivity issues
+- Build argument conflicts (fixed in the updated Dockerfile)
 
 ## Support
 
