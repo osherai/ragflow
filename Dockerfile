@@ -224,9 +224,17 @@ COPY docs docs
 RUN --mount=type=cache,id=ragflow_npm,target=/root/.npm,sharing=locked \
     cd web && npm install && npm run build
 
-COPY .git /ragflow/.git
+# Copy .git directory if it exists (for version info), otherwise create a minimal one
+RUN if [ -d ".git" ]; then \
+        cp -r .git /ragflow/.git; \
+    else \
+        mkdir -p /ragflow/.git; \
+        echo "ref: refs/heads/main" > /ragflow/.git/HEAD; \
+        mkdir -p /ragflow/.git/refs/heads; \
+        echo "$(date +%s)" > /ragflow/.git/refs/heads/main; \
+    fi
 
-RUN version_info=$(git describe --tags --match=v* --first-parent --always); \
+RUN version_info=$(git describe --tags --match=v* --first-parent --always 2>/dev/null || echo "unknown-$(date +%Y%m%d)"); \
     if [ "$LIGHTEN" == "1" ]; then \
         version_info="$version_info slim"; \
     else \
