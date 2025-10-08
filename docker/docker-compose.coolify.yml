@@ -249,7 +249,6 @@ services:
     volumes:
       - ./docker/ragflow-logs:/ragflow/logs
       - ./history_data_agent:/ragflow/history_data_agent
-      - ./docker/service_conf.yaml.template:/ragflow/conf/service_conf.yaml.template
     env_file: .env
     environment:
       - TZ=${TIMEZONE}
