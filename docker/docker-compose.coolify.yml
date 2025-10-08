@@ -216,7 +216,7 @@ services:
       mysql:
         condition: service_healthy
     build:
-      context: ../
+      context: .
       dockerfile: Dockerfile
       args:
         NEED_MIRROR: ${NEED_MIRROR:-0}
