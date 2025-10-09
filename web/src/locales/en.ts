@@ -59,14 +59,14 @@ export default {
     login: {
       login: 'Sign in',
       signUp: 'Sign up',
-      loginDescription: 'We’re so excited to see you again!',
-      registerDescription: 'Glad to have you on board!',
+      loginDescription: 'Welcome back to Osher Digital!',
+      registerDescription: 'Welcome to Osher Digital!',
       emailLabel: 'Email',
       emailPlaceholder: 'Please input email',
       passwordLabel: 'Password',
       passwordPlaceholder: 'Please input password',
       rememberMe: 'Remember me',
-      signInTip: 'Don’t have an account?',
+      signInTip: 'Don't have an account?',
       signUpTip: 'Already have an account?',
       nicknameLabel: 'Nickname',
       nicknamePlaceholder: 'Please input nickname',
@@ -74,8 +74,8 @@ export default {
       continue: 'Continue',
       title: 'Start building your smart assistants.',
       description:
-        'Sign up for free to explore top RAG technology. Create knowledge bases and AIs to empower your business.',
-      review: 'from 500+ reviews',
+        'Create knowledge bases and AI assistants to empower your business with Osher Digital.',
+      review: 'Trusted by businesses worldwide',
     },
     header: {
       knowledgeBase: 'Dataset',
