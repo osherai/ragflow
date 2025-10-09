@@ -2,10 +2,7 @@ import { useCallback } from 'react';
 
 export function useOpenDocument() {
   const openDocument = useCallback(() => {
-    window.open(
-      'https://ragflow.io/docs/dev/category/agent-components',
-      '_blank',
-    );
+    // Documentation link removed - contact info@osher.com.au for support
   }, []);
 
   return openDocument;

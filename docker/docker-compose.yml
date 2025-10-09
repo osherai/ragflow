@@ -2,7 +2,7 @@ include:
   - ./docker-compose-base.yml
 # To ensure that the container processes the locally modified `service_conf.yaml.template` instead of the one included in its image, you need to mount the local `service_conf.yaml.template` to the container.
 services:
-  ragflow:
+  osher-digital:
     depends_on:
       mysql:
         condition: service_healthy
@@ -33,7 +33,7 @@ services:
       - 5679:5679
       - 9382:9382 # entry for MCP (host_port:docker_port). The docker_port must match the value you set for `mcp-port` above.
     volumes:
-      - ./ragflow-logs:/ragflow/logs
+      - ./osher-digital-logs:/ragflow/logs
       - ./nginx/ragflow.conf:/etc/nginx/conf.d/ragflow.conf
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -46,7 +46,7 @@ services:
       - HF_ENDPOINT=${HF_ENDPOINT-}
       - MACOS=${MACOS-}
     networks:
-      - ragflow
+      - osher-digital
     restart: on-failure
     # https://docs.docker.com/engine/daemon/prometheus/#create-a-prometheus-configuration
     # If you use Docker Desktop, the --add-host flag is optional. This flag ensures that the host's internal IP is exposed to the Prometheus container.
@@ -56,8 +56,8 @@ services:
   #   depends_on:
   #     mysql:
   #       condition: service_healthy
-  #   image: ${RAGFLOW_IMAGE}
-  #   container_name: ragflow-executor
+  #   image: ${OSHER_DIGITAL_IMAGE}
+  #   container_name: osher-digital-executor
   #   volumes:
   #     - ./ragflow-logs:/ragflow/logs
   #     - ./nginx/ragflow.conf:/etc/nginx/conf.d/ragflow.conf

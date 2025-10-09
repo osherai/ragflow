@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Ragflow Extension",
-  "description": "Ragflow for Chrome",
+  "name": "Osher Digital Extension",
+  "description": "Osher Digital for Chrome",
   "version": "1.0",
   "options_page": "options.html",
 

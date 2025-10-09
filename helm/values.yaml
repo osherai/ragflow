@@ -17,24 +17,24 @@ env:
   STACK_VERSION: "8.11.3"
 
   # The password for Elasticsearch
-  ELASTIC_PASSWORD: infini_rag_flow_helm
+  ELASTIC_PASSWORD: osher_digital_helm
 
   # The password for OpenSearch.
   # At least one uppercase letter, one lowercase letter, one digit, and one special character
-  OPENSEARCH_PASSWORD: infini_rag_flow_OS_01
+  OPENSEARCH_PASSWORD: osher_digital_OS_01
 
   # The password for MySQL
-  MYSQL_PASSWORD: infini_rag_flow_helm
+  MYSQL_PASSWORD: osher_digital_helm
   # The database of the MySQL service to use
-  MYSQL_DBNAME: rag_flow
+  MYSQL_DBNAME: osher_digital
 
   # The username for MinIO.
-  MINIO_ROOT_USER: rag_flow
+  MINIO_ROOT_USER: osher_digital
   # The password for MinIO
-  MINIO_PASSWORD: infini_rag_flow_helm
+  MINIO_PASSWORD: osher_digital_helm
 
   # The password for Redis
-  REDIS_PASSWORD: infini_rag_flow_helm
+  REDIS_PASSWORD: osher_digital_helm
 
   # The local time zone.
   TIMEZONE: "Asia/Shanghai"

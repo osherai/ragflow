@@ -1,6 +1,6 @@
 {
   "private": true,
-  "author": "bill",
+  "author": "Osher Digital",
   "scripts": {
     "build": "umi build",
     "build-storybook": "storybook build",

@@ -1,8 +1,8 @@
 [project]
-name = "ragflow-sdk"
-version = "0.20.4"
-description = "Python client sdk of [RAGFlow](https://github.com/infiniflow/ragflow). RAGFlow is an open-source RAG (Retrieval-Augmented Generation) engine based on deep document understanding."
-authors = [{ name = "Zhichang Yu", email = "yuzhichang@gmail.com" }]
+name = "osher-digital-sdk"
+version = "1.0.0"
+description = "Python client SDK for Osher Digital - an advanced RAG (Retrieval-Augmented Generation) engine."
+authors = [{ name = "Osher Digital", email = "info@osher.com.au" }]
 license = { text = "Apache License, Version 2.0" }
 readme = "README.md"
 requires-python = ">=3.10,<3.13"

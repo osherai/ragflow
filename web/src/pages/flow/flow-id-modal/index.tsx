@@ -23,12 +23,9 @@ const FlowIdModal = ({ hideModal }: IModalProps<any>) => {
       <Paragraph copyable={{ text: id }} className={styles.id}>
         {id}
       </Paragraph>
-      <Link
-        href="https://ragflow.io/docs/dev/http_api_reference#create-session-with-an-agent"
-        target="_blank"
-      >
+      <span>
         {t('howUseId')}
-      </Link>
+      </span>
     </Modal>
   );
 };
