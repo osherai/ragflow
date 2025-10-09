@@ -151,14 +151,12 @@ services:
       --collation-server=utf8mb4_unicode_ci
       --default-authentication-plugin=mysql_native_password
       --tls_version="TLSv1.2,TLSv1.3"
-      --init-file /data/application/init.sql
       --binlog_expire_logs_seconds=604800
       --innodb_buffer_pool_size=256M
     ports:
       - ${MYSQL_PORT}:3306
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./docker/init.sql:/data/application/init.sql
     networks:
       - ragflow
     healthcheck:
