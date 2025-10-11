@@ -1872,7 +1872,7 @@ Success:
                 "content_ltks": "ragflow content",
                 "document_id": "5c5999ec7be811ef9cab0242ac120005",
                 "document_keyword": "1.txt",
-                "highlight": "<em>ragflow</em> content",
+                "highlight": "<em>Agent</em> content",
                 "id": "d78435d142bd5cf6704da62c778795c5",
                 "image_id": "",
                 "important_keywords": [
