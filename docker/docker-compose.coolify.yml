@@ -139,6 +139,8 @@ services:
     env_file: .env
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=rag_flow
+      - MYSQL_ROOT_HOST=%
       - TZ=${TIMEZONE}
     command: --max_connections=500
       --character-set-server=utf8mb4
@@ -148,10 +150,8 @@ services:
       --binlog_expire_logs_seconds=604800
       --innodb_buffer_pool_size=256M
     # Port mapping removed - internal communication only
-    # Init SQL will run automatically from docker-entrypoint-initdb.d on first startup
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - ragflow
     healthcheck:
