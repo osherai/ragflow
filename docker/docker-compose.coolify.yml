@@ -147,9 +147,11 @@ services:
       --tls_version="TLSv1.2,TLSv1.3"
       --binlog_expire_logs_seconds=604800
       --innodb_buffer_pool_size=256M
+      --init-file /docker-entrypoint-initdb.d/init.sql
     # Port mapping removed - internal communication only
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ragflow
     healthcheck:
