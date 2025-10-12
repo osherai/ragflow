@@ -272,6 +272,11 @@ COPY docker/service_conf.yaml.template ./conf/service_conf.yaml.template
 COPY docker/entrypoint.sh ./
 RUN chmod +x ./entrypoint*.sh
 
+# Copy nginx configuration files for Coolify deployment
+COPY docker/nginx/ragflow.conf /etc/nginx/conf.d/ragflow.conf
+COPY docker/nginx/proxy.conf /etc/nginx/proxy.conf
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Copy compiled web pages
 COPY --from=builder /ragflow/web/dist /ragflow/web/dist
 
