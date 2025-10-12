@@ -231,7 +231,9 @@ services:
     #   - --no-transport-streamable-http-enabled #  Disable Streamable HTTP transport (/mcp endpoint)
     #   - --no-json-response # Disable JSON response mode in Streamable HTTP transport (instead of SSE over HTTP)
     container_name: osher-digital-server
-    # No port mappings - Coolify will handle routing via its reverse proxy
+    # Expose internal port for Coolify's reverse proxy
+    expose:
+      - "9380"
     volumes:
       - ./docker/ragflow-logs:/ragflow/logs
       - ./history_data_agent:/ragflow/history_data_agent
