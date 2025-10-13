@@ -3,9 +3,67 @@ FROM ubuntu:22.04 AS base
 USER root
 SHELL ["/bin/bash", "-c"]
 
+# Build args that are actually used
 ARG NEED_MIRROR=0
 ARG LIGHTEN=0
 ENV LIGHTEN=${LIGHTEN}
+
+# Coolify compatibility: Accept (but ignore) build args that Coolify automatically injects
+# This prevents "Unknown variable" errors during build
+ARG SOURCE_COMMIT=""
+ARG COOLIFY_BRANCH=""
+ARG COOLIFY_RESOURCE_UUID=""
+ARG COOLIFY_CONTAINER_NAME=""
+ARG COOLIFY_URL=""
+ARG COOLIFY_FQDN=""
+ARG COOLIFY_BUILD_SECRETS_HASH=""
+ARG COMPOSE_PROFILES=""
+ARG DOC_BULK_SIZE=""
+ARG DOC_ENGINE=""
+ARG ELASTIC_PASSWORD=""
+ARG EMBEDDING_BATCH_SIZE=""
+ARG ES_HOST=""
+ARG ES_PORT=""
+ARG HF_ENDPOINT=""
+ARG INFINITY_HOST=""
+ARG INFINITY_HTTP_PORT=""
+ARG INFINITY_PSQL_PORT=""
+ARG INFINITY_THRIFT_PORT=""
+ARG KIBANA_PASSWORD=""
+ARG KIBANA_PORT=""
+ARG KIBANA_USER=""
+ARG MACOS=""
+ARG MEM_LIMIT=""
+ARG MINIO_CONSOLE_PORT=""
+ARG MINIO_HOST=""
+ARG MINIO_PASSWORD=""
+ARG MINIO_PORT=""
+ARG MINIO_USER=""
+ARG MYSQL_DBNAME=""
+ARG MYSQL_HOST=""
+ARG MYSQL_MAX_PACKET=""
+ARG MYSQL_PASSWORD=""
+ARG MYSQL_PORT=""
+ARG OPENSEARCH_PASSWORD=""
+ARG OS_HOST=""
+ARG OS_PORT=""
+ARG RAGFLOW_IMAGE=""
+ARG REDIS_HOST=""
+ARG REDIS_PASSWORD=""
+ARG REDIS_PORT=""
+ARG REGISTER_ENABLED=""
+ARG SANDBOX_BASE_NODEJS_IMAGE=""
+ARG SANDBOX_BASE_PYTHON_IMAGE=""
+ARG SANDBOX_ENABLE_SECCOMP=""
+ARG SANDBOX_EXECUTOR_MANAGER_POOL_SIZE=""
+ARG SANDBOX_MAX_MEMORY=""
+ARG SANDBOX_TIMEOUT=""
+ARG STACK_VERSION=""
+ARG SVR_HTTP_PORT=""
+ARG TIMEZONE=""
+ARG SANDBOX_EXECUTOR_MANAGER_IMAGE=""
+ARG SANDBOX_EXECUTOR_MANAGER_PORT=""
+ARG INFINITY_DATA=""
 
 WORKDIR /ragflow
 
@@ -166,9 +224,17 @@ COPY docs docs
 RUN --mount=type=cache,id=ragflow_npm,target=/root/.npm,sharing=locked \
     cd web && npm install && npm run build
 
-COPY .git /ragflow/.git
+# Copy .git directory if it exists (for version info), otherwise create a minimal one
+RUN if [ -d ".git" ]; then \
+        cp -r .git /ragflow/.git; \
+    else \
+        mkdir -p /ragflow/.git; \
+        echo "ref: refs/heads/main" > /ragflow/.git/HEAD; \
+        mkdir -p /ragflow/.git/refs/heads; \
+        echo "$(date +%s)" > /ragflow/.git/refs/heads/main; \
+    fi
 
-RUN version_info=$(git describe --tags --match=v* --first-parent --always); \
+RUN version_info=$(git describe --tags --match=v* --first-parent --always 2>/dev/null || echo "unknown-$(date +%Y%m%d)"); \
     if [ "$LIGHTEN" == "1" ]; then \
         version_info="$version_info slim"; \
     else \
@@ -205,6 +271,11 @@ COPY plugin plugin
 COPY docker/service_conf.yaml.template ./conf/service_conf.yaml.template
 COPY docker/entrypoint.sh ./
 RUN chmod +x ./entrypoint*.sh
+
+# Copy nginx configuration files for Coolify deployment
+COPY docker/nginx/ragflow.conf /etc/nginx/conf.d/ragflow.conf
+COPY docker/nginx/proxy.conf /etc/nginx/proxy.conf
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Copy compiled web pages
 COPY --from=builder /ragflow/web/dist /ragflow/web/dist
