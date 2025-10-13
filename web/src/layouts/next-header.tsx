@@ -120,7 +120,8 @@ export function Header() {
         onChange={handleChange}
       ></Segmented>
       <div className="flex items-center gap-5 text-text-badge">
-        <DropdownMenu>
+        {/* Language selector commented out */}
+        {/* <DropdownMenu>
           <DropdownMenuTrigger>
             <div className="flex items-center gap-1">
               {t(`common.${camelCase(language)}`)}
@@ -134,7 +135,7 @@ export function Header() {
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
         <Button variant={'ghost'} onClick={handleDocHelpCLick}>
           <CircleHelp />
         </Button>
