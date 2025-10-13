@@ -51,9 +51,10 @@ export const AssistantGroupButton = ({
   return (
     <>
       <Radio.Group size="small">
-        <Radio.Button value="a">
+        {/* Copy button removed for embed customization */}
+        {/* <Radio.Button value="a">
           <CopyToClipboard text={content}></CopyToClipboard>
-        </Radio.Button>
+        </Radio.Button> */}
         {showLoudspeaker && (
           <Radio.Button value="b" onClick={handleRead}>
             <Tooltip title={t('chat.read')}>
@@ -72,11 +73,12 @@ export const AssistantGroupButton = ({
             </Radio.Button>
           </>
         )}
-        {prompt && (
+        {/* Light bulb/suggestion button removed for embed customization */}
+        {/* {prompt && (
           <Radio.Button value="e" onClick={showPromptModal}>
             <PromptIcon style={{ fontSize: '16px' }} />
           </Radio.Button>
-        )}
+        )} */}
       </Radio.Group>
       {visible && (
         <FeedbackModal
@@ -119,9 +121,10 @@ export const UserGroupButton = ({
 
   return (
     <Radio.Group size="small">
-      <Radio.Button value="a">
+      {/* Copy button removed for embed customization */}
+      {/* <Radio.Button value="a">
         <CopyToClipboard text={content}></CopyToClipboard>
-      </Radio.Button>
+      </Radio.Button> */}
       {regenerateMessage && (
         <Radio.Button
           value="b"

@@ -67,9 +67,10 @@ export const AssistantGroupButton = ({
         variant="outline"
         className="space-x-1"
       >
-        <ToggleGroupItem value="a">
+        {/* Copy button removed for embed customization */}
+        {/* <ToggleGroupItem value="a">
           <CopyToClipboard text={content}></CopyToClipboard>
-        </ToggleGroupItem>
+        </ToggleGroupItem> */}
         {showLoudspeaker && (
           <ToggleGroupItem value="b" onClick={handleRead}>
             <Tooltip title={t('chat.read')}>
@@ -88,11 +89,12 @@ export const AssistantGroupButton = ({
             </ToggleGroupItem>
           </>
         )}
-        {prompt && (
+        {/* Light bulb/suggestion button removed for embed customization */}
+        {/* {prompt && (
           <Radio.Button value="e" onClick={showPromptModal}>
             <PromptIcon style={{ fontSize: '16px' }} />
           </Radio.Button>
-        )}
+        )} */}
         {showLog && (
           <ToggleGroupItem value="f" onClick={handleShowLogSheet}>
             <NotebookText className="size-4" />
@@ -140,9 +142,10 @@ export const UserGroupButton = ({
 
   return (
     <Radio.Group size="small">
-      <Radio.Button value="a">
+      {/* Copy button removed for embed customization */}
+      {/* <Radio.Button value="a">
         <CopyToClipboard text={content}></CopyToClipboard>
-      </Radio.Button>
+      </Radio.Button> */}
       {regenerateMessage && (
         <Radio.Button
           value="b"
