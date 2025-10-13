@@ -211,6 +211,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     build:
       context: .
       dockerfile: Dockerfile
@@ -245,9 +247,21 @@ services:
       - TZ=${TIMEZONE}
       - HF_ENDPOINT=${HF_ENDPOINT-}
       - MACOS=${MACOS-}
+      # Keep-alive settings to prevent connection timeouts
+      - KEEP_ALIVE_TIMEOUT=75
+      - KEEP_ALIVE_REQUESTS=100
     networks:
       - ragflow
-    restart: on-failure
+    restart: unless-stopped
+    # Health check to prevent Coolify from marking service as unhealthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/healthz", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # Resource limits to prevent memory issues
+    mem_limit: ${MEM_LIMIT:-2g}
     # https://docs.docker.com/engine/daemon/prometheus/#create-a-prometheus-configuration
     # If you use Docker Desktop, the --add-host flag is optional. This flag ensures that the host's internal IP is exposed to the Prometheus container.
     extra_hosts:
