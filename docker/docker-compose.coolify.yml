@@ -35,8 +35,6 @@ services:
       interval: 10s
       timeout: 10s
       retries: 120
-    networks:
-      - ragflow
     restart: on-failure
 
   opensearch01:
@@ -72,8 +70,6 @@ services:
       interval: 10s
       timeout: 10s
       retries: 120
-    networks:
-      - ragflow
     restart: on-failure
 
   infinity:
@@ -94,8 +90,6 @@ services:
       nofile:
         soft: 500000
         hard: 500000
-    networks:
-      - ragflow
     healthcheck:
       test: ["CMD", "curl", "http://localhost:23820/admin/node/current"]
       interval: 10s
@@ -113,8 +107,6 @@ services:
     env_file: .env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - ragflow
     security_opt:
       - no-new-privileges:true
     environment:
@@ -152,8 +144,6 @@ services:
     # Port mapping removed - internal communication only
     volumes:
       - mysql_data:/var/lib/mysql
-    networks:
-      - ragflow
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-uroot", "-p${MYSQL_PASSWORD}"]
       interval: 30s
@@ -178,8 +168,6 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - minio_data:/data
-    networks:
-      - ragflow
     restart: on-failure
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -196,8 +184,6 @@ services:
     # Port mapping removed - internal communication only
     volumes:
       - redis_data:/data
-    networks:
-      - ragflow
     restart: on-failure
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
@@ -247,8 +233,6 @@ services:
       - TZ=${TIMEZONE}
       - HF_ENDPOINT=${HF_ENDPOINT-}
       - MACOS=${MACOS-}
-    networks:
-      - ragflow
     restart: on-failure
     # https://docs.docker.com/engine/daemon/prometheus/#create-a-prometheus-configuration
     # If you use Docker Desktop, the --add-host flag is optional. This flag ensures that the host's internal IP is exposed to the Prometheus container.
@@ -292,7 +276,3 @@ volumes:
     driver: local
   ragflow_logs:
     driver: local
-
-networks:
-  ragflow:
-    driver: bridge
