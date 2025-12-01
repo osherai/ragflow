@@ -223,6 +223,8 @@ services:
     container_name: osher-digital-server
     # Expose internal port for Coolify's reverse proxy
     # Nginx on port 80 serves frontend and proxies API to Flask on 9380
+    expose:
+      - "80"
     volumes:
       - ragflow_logs:/ragflow/logs
       - ./history_data_agent:/ragflow/history_data_agent
